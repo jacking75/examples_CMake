@@ -28,16 +28,22 @@ set(CMAKE_BUILD_TYPE Debug)
 
 
 ### 정리해야 하는 것들
-CMake 簡易まとめ http://qiita.com/janus_wel/items/a673793d448c72cbc95e
-cmakeでビルド時にシェルスクリプトを実行する http://qiita.com/termoshtt/items/7f7090f9d0c52bcd2630
-C++11 向け gcc オプション http://qiita.com/janus_wel/items/07140fcd1127b568087d
-CMake/C++ プロジェクトについて GCC または Clang のバージョンに併せた最新の -std オプションを与える CMake の記述例  http://qiita.com/usagi/items/a12d5bf08f4a7a13329d
-CMake で Boost を静的リンクする http://qiita.com/janus_wel/items/cbad087b5c3a13a57625
-cmakeでboostライブラリのリンク順を指定 http://qiita.com/YukiMiyatake/items/345c665b11a7687a7968
-CMakeのin-sourceとouf-of-sourceの違い http://qiita.com/tttamaki/items/2830e1df4efa48f247ac
-non-trivialなBoost.Logの使い方(4. cmakeによるコンパイル編) http://qiita.com/termoshtt/items/9c856562fe8a8c42560c
-How to compile a 32-bit binary on a 64-bit linux machine with gcc/cmake http://stackoverflow.com/questions/1272357/how-to-compile-a-32-bit-binary-on-a-64-bit-linux-machine-with-gcc-cmake
-CMakeでプロジェクトを作成する(Windows) http://qiita.com/Lacty/items/d02eeba72dde2b875c31  
+- CMakeの勧め
+http://www.wakayama-u.ac.jp/~chen/cmake/cmake.html
+- CMakeLists Tutorial
+https://gist.github.com/UnaNancyOwen/47159d73b480f16b846a
+- Visual Studio 2017にOpenCV3.2.0とopencv_contribを導入する方法
+http://qiita.com/tomochiii/items/fa26404ebc5fcd4481b9
+- CMake 簡易まとめ http://qiita.com/janus_wel/items/a673793d448c72cbc95e
+- cmakeでビルド時にシェルスクリプトを実行する http://qiita.com/termoshtt/items/7f7090f9d0c52bcd2630
+- C++11 向け gcc オプション http://qiita.com/janus_wel/items/07140fcd1127b568087d
+- CMake/C++ プロジェクトについて GCC または Clang のバージョンに併せた最新の -std オプションを与える CMake の記述例  http://qiita.com/usagi/items/a12d5bf08f4a7a13329d
+- CMake で Boost を静的リンクする http://qiita.com/janus_wel/items/cbad087b5c3a13a57625
+- cmakeでboostライブラリのリンク順を指定 http://qiita.com/YukiMiyatake/items/345c665b11a7687a7968
+- CMakeのin-sourceとouf-of-sourceの違い http://qiita.com/tttamaki/items/2830e1df4efa48f247ac
+- non-trivialなBoost.Logの使い方(4. cmakeによるコンパイル編) http://qiita.com/termoshtt/items/9c856562fe8a8c42560c
+- How to compile a 32-bit binary on a 64-bit linux machine with gcc/cmake http://stackoverflow.com/questions/1272357/how-to-compile-a-32-bit-binary-on-a-64-bit-linux-machine-with-gcc-cmake
+- CMakeでプロジェクトを作成する(Windows) http://qiita.com/Lacty/items/d02eeba72dde2b875c31  
 
 
 ### 참고
