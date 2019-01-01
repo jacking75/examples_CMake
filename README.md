@@ -1,7 +1,7 @@
 # CMake 예제
 
 ## 예제 소개
-- 사용할 코드는 Cmake_example 디렉토리에 있다.  
+- 예제 코드는 CMake_example 디렉토리에 있다.  
 
 
 ## 01 helloworld
