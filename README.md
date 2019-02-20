@@ -346,3 +346,7 @@ set(CMAKE_BUILD_TYPE Debug)
 </pre>
   
 로 하는 것이 가능하다.  
+
+
+## 외부 글
+- [CMake 할때 쪼오오금 도움이 되는 문서](https://gist.github.com/luncliff/6e2d4eb7ca29a0afd5b592f72b80cb5c )
