@@ -644,4 +644,8 @@ CMake가 자동으로 설정한 컴파일러 또는 옵션 등이 원하지 않�
   
 ## 외부 글
 - [CMake 할때 쪼오오금 도움이 되는 문서](https://gist.github.com/luncliff/6e2d4eb7ca29a0afd5b592f72b80cb5c )
+- [CMakeLists.txt 명령](https://sonseungha.tistory.com/372 )
+- [1. CMake 소개와 예제, 내부 동작 원리](https://www.tuwlab.com/ece/27234 )
+- [2. CMakeLists.txt 주요 명령과 변수 정리](https://www.tuwlab.com/ece/27260 )
+- [3. CMakeLists.txt 기본 패턴](https://www.tuwlab.com/ece/27270 )
 
