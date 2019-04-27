@@ -641,11 +641,127 @@ CMake가 자동으로 설정한 컴파일러 또는 옵션 등이 원하지 않�
 이것도 set 명령과 -D 옵션으로 지정한다. 어떤 변수가 있을지는 역시 Wiki의 CMake Useful Variables 이 도움이 될 것이다.  
   
   
+ 
+##Tips 
+### C++14로 컴파일 하기
   
+```  
+enable_language(CXX)
+set(CMAKE_CXX_STANDARD 14) # C++14...
+set(CMAKE_CXX_STANDARD_REQUIRED ON) #...is required...
+set(CMAKE_CXX_EXTENSIONS OFF) #...without compiler extensions like gnu++11
+```
+  
+CMAKE_CXX_STANDARD 에 11, 14, 17 로 지정한다.  
+  
+CMAKE_CXX_EXTENSIONS을 OFF로 하지 않으면 GNU 확장이 사용된다.   
+  
+  
+### 경고 레벨
+Visual C++ 이라면 /W4, GCC/Clang 이라면 -Wall -Wextra 를 붙인다.  
+```
+if(MSVC)
+  # Force to always compile with W4
+  if(CMAKE_CXX_FLAGS MATCHES "/W[0-4]")
+    string(REGEX REPLACE "/W[0-4]" "/W4" CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
+  else()
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /W4")
+  endif()
+elseif(CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUCXX)
+  # Update if necessary
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wno-long-long -pedantic")
+endif()
+```
+  
+  
+### 자주 사용하는 옵션
+옵션으로 자주 사용하는 것이라면 최적화 옵션 O 나 c ++ 11/14/17 기능을 활성화 하는 -std=c++11/14/1z 와 -Wall 등의 경고 옵션.  
+명령 줄에서 빌드하는 경우, 예를 들면 이런 식으로 옵션을 추가한다.  
+```
+g++ -O2 -std = c ++ 11 -Wall ... (기타 다양한 부가)
+```
+  
+   
+### CMake 업그레이드 하기
+패키지로 설치 되는 것보다 더 높은 버전을 원한다면 직접 설치해야 한다.  
+  
+현재(2018.11) 최신 버전은 3.13.0 버전이고, 이 비전의 소스를 다운로드 한다.   
+다운로드 주소는 https://cmake.org/download/ 에서 알 수 있다.  
+  
+다운로드 한다.
+```
+$ wget https://cmake.org/files/v3.13/cmake-3.13.0.tar.gz
+```
+  
+압축을 푼다  
+```
+$ tar -zxvf cmake-3.13.0.tar.gz
+```  
+  
+빌드 후 설치한다  
+<pre>
+$ cd cmake-3.13.0
+$ ./bootstrap
+$ make
+$ sudo make install
+</pre>
+  
+설치는 /usr/local/bin 에 설치된다  
+  
+  
+## Makefile 에서 += 라는 것을 CMake에서 어떻게 기술?
+예를들면 Makefile 에서  
+```
+SRCS += hoge.c
+```  
+라는 것은   
+``` 
+set(SRCS ${SRCS} hoge.c)  
+```
+  
+컴파일러 플래그에 세미콜롬(';')을 넣어서 빌드가 중단 되었다.  
+CMake는 내부에서는 리스트를 세미콜롬 구별 문자열로 정리하고 있으므로 이것을 컴파일러에 넘기면 세미컬럼이 남겨져 버린다.    
+이런 경우 ""로 구별하는 것으로 세미콜롬 구별을 스페이스 구별로 변환해 준다.    
+```
+CFLAGS += -g
+```   
+라는 Makefile 에서 쓴 것을   
+``` 
+set (CMAKE_C_FLAGS ${CMAKE_C_FLAGS} "-g")
+```  
+  
+라고 하면 세미콜롬이 들어가서 죽는다.    
+```
+set (CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g")
+```  
+로 하면 OK.  
+      
+타겟 이름을 libhoge로 해서 라이브러리를 빌드하면 liblibhoge.so 로 된다  
+빌드 후에 파일의 복사하는 것이 아닌 set_target_property()를 사용하여 OUTPUT_NAME 속성을 변경하면 좋다    
+단 선두의 "lib"만을 제거하는 것은 더 간단하므로 PREFIX 속성을 조작하면 삭제 OK.  
+```
+set (TARGET_NAME libhoge)
+add_library (${TARGET_NAME} SHARED hoge.c hoge2.c)
+set_target_properties (${TARGET_NAME}
+                       PROPERTIES PREFIX
+                       "")
+```					   
+  
+  
+    
 ## 외부 글
 - [CMake 할때 쪼오오금 도움이 되는 문서](https://gist.github.com/luncliff/6e2d4eb7ca29a0afd5b592f72b80cb5c )
 - [CMakeLists.txt 명령](https://sonseungha.tistory.com/372 )
 - [1. CMake 소개와 예제, 내부 동작 원리](https://www.tuwlab.com/ece/27234 )
 - [2. CMakeLists.txt 주요 명령과 변수 정리](https://www.tuwlab.com/ece/27260 )
 - [3. CMakeLists.txt 기본 패턴](https://www.tuwlab.com/ece/27270 )
-
+- [Linking GLEW with CMake](https://stackoverflow.com/questions/27472813/linking-glew-with-cmake )
+- [cmake에서 정적 라이브러리를 하나로 합치기](http://ospace.tistory.com/539 )
+- [Bootstrapping a vcpkg-based cmake project in Visual Studio]( http://cpptruths.blogspot.com/2019/03/bootstrapping-vcpkg-based-cmake-project.html )
+- [Bootstrapping a vcpkg-based project in Linux and Windows with idiomatic cmake]( http://cpptruths.blogspot.com/2019/03/bootstrapping-vcpkg-based-cmake-project_31.html )
+- [awesome-cmake](https://github.com/onqtam/awesome-cmake )
+- [cmake-tutorial](https://github.com/pyk/cmake-tutorial )
+- [cmake-examples](https://github.com/ttroy50/cmake-examples )
+- [cmake_cookbook](https://github.com/mechazoidal/cmake_cookbook )  
+- [dev-cafe/cmake-cookbook](https://github.com/dev-cafe/cmake-cookbook )
+    - ZeroMQ, minizip 등의 외부 라이브러리를 사용하는 예제 코드가 있음.
