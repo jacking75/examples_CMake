@@ -1,7 +1,6 @@
 # 빌드 시에 공개 헤더 파일을 한 장소에 복사 하고 싶다
-  
-아래와 같은 프로젝트가 있고  
-
+아래와 같은 프로젝트가 있고    
+<pre>
 .
 ├── lib
 │     ├── libhoge
@@ -20,17 +19,16 @@
 ├── src
 │     └── main.c
 └── CMakeLists.txt
-
+</pre>
   
-빌드를 실행하기 전에 export_headers 라는 디렉토리를 만들고  
+빌드를 실행하기 전에 export_headers 라는 디렉토리를 만들고    
 - libhoge/hoge.h
 - libhoge/hoge_common.h
 - libfuga/fuga.h
-을 복사해서 저장하고 싶다  라는 경우  
   
-add_custom_target()를 사용하여 명령어를 정의하고, 게다가 add_dependencies() 로 의존 관계를 만들어 두면 빌드 전에 무엇인가를 실행 시킬 수 있다.  
-즉 예를들면 lib/libhoge/CMakeLists.txt 중에
-  
+을 복사해서 저장하고 싶다  라는 경우    
+add_custom_target()를 사용하여 명령어를 정의하고, 게다가 add_dependencies() 로 의존 관계를 만들어 두면 빌드 전에 무엇인가를 실행 시킬 수 있다.    
+즉 예를들면 lib/libhoge/CMakeLists.txt 중에    
 ```
 add_library (libhoge SHARED src/src1.c src/src2.c)
 add_custom_target (copy_header_hoge_h
@@ -38,12 +36,11 @@ add_custom_target (copy_header_hoge_h
                    ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/include/hoge.h
                                             ${CMAKE_BINARY_DIR}/export_headers/libhoge/hoge.h)
 add_dependencies(libhoge copy_header_hoge_h)
- 
-라고 써 두면 libhoge를 빌드 하기 전에 include/hoge.h를 복하할 수 있다. 
-매크로를 만들어 보자 
-   
-lib/libhoge/CMakeLists.txt 
- 
+```   
+라고 써 두면 libhoge를 빌드 하기 전에 include/hoge.h를 복사 할 수 있다.   
+매크로를 만들어 보자      
+lib/libhoge/CMakeLists.txt   
+``` 
 set (TARGET_NAME libhoge)
 set (SRCS
     src/src1.c
@@ -59,7 +56,7 @@ set (EXPORT_HEADER_FILES
     include/hoge.h
     include/hoge_common.h
 )
-# export_headers内のサブディレクトリ名
+# export_headers 서브 디렉토리 이름
 set (EXPORT_HEADER_DIR libhoge)
   
 include_directories (${C_INCLUDES})
@@ -69,10 +66,10 @@ set_target_properties (${TARGET_NAME}
                        "")
 # 매크로이므로 인수에 리스트를 넘기 때는 ""으로 감싸는 것에 주의.
 copy_headers (${TARGET_NAME} ${EXPORT_HEADER_DIR} "${EXPORT_HEADER_FILES}")
-   
+```   
      
-lib/libfuga/CMakeLists.txt 
- 
+lib/libfuga/CMakeLists.txt   
+``` 
 set (TARGET_NAME libfuga)
 set (SRCS
     fuga.c
@@ -90,10 +87,10 @@ set_target_properties (${TARGET_NAME}
                        PROPERTIES PREFIX
                        "")
 copy_headers (${TARGET_NAME} ${EXPORT_HEADER_DIR} "${EXPORT_HEADER_FILES}")
+```   
    
-   
-./CMakeLists.txt
- 
+./CMakeLists.txt  
+``` 
 # ---------- 공통 설정
   
 # 버전은 적당하게
@@ -158,3 +155,4 @@ include_directories (${GLOBAL_HEADER_DIR})
 add_executable (${TARGET_EXE_NAME} ${SRCS})
 target_link_libraries (${TARGET_EXE_NAME} ${SHARED_LIBS})
 ```  
+  
