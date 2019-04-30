@@ -745,23 +745,47 @@ add_library (${TARGET_NAME} SHARED hoge.c hoge2.c)
 set_target_properties (${TARGET_NAME}
                        PROPERTIES PREFIX
                        "")
-```					   
+```
   
   
-    
-## 외부 글
-- [CMake 할때 쪼오오금 도움이 되는 문서](https://gist.github.com/luncliff/6e2d4eb7ca29a0afd5b592f72b80cb5c )
-- [CMakeLists.txt 명령](https://sonseungha.tistory.com/372 )
-- [1. CMake 소개와 예제, 내부 동작 원리](https://www.tuwlab.com/ece/27234 )
-- [2. CMakeLists.txt 주요 명령과 변수 정리](https://www.tuwlab.com/ece/27260 )
-- [3. CMakeLists.txt 기본 패턴](https://www.tuwlab.com/ece/27270 )
-- [Linking GLEW with CMake](https://stackoverflow.com/questions/27472813/linking-glew-with-cmake )
-- [cmake에서 정적 라이브러리를 하나로 합치기](http://ospace.tistory.com/539 )
-- [Bootstrapping a vcpkg-based cmake project in Visual Studio]( http://cpptruths.blogspot.com/2019/03/bootstrapping-vcpkg-based-cmake-project.html )
-- [Bootstrapping a vcpkg-based project in Linux and Windows with idiomatic cmake]( http://cpptruths.blogspot.com/2019/03/bootstrapping-vcpkg-based-cmake-project_31.html )
-- [awesome-cmake](https://github.com/onqtam/awesome-cmake )
+  
+## 번역 글 
+- [손쉬운 xxx-config.cmake을 만드는 방법](xxx-config.cmake.md)
+- [IMPORTED 타겟](IMPORTED_target.md)
+- [빌드 시에 공개 헤더 파일을 한 장소에 복사 하고 싶다](headerFile_copy.md)
+- [find_package 와 pkg_check_modules에 의한 라이브러리 탐색](find_package_And_pkg_check_modules.md)
+- [CMake에서 빌드하는 코드에 clang-tidy를 실행](clang-tidy.md)
+- [조금씩 설정을 바꾸어서 같은 소스 코드를 빌드하고 싶을 때](change_config.md)
+  
+  
+  
+## 예제 코드  
 - [cmake-tutorial](https://github.com/pyk/cmake-tutorial )
 - [cmake-examples](https://github.com/ttroy50/cmake-examples )
 - [cmake_cookbook](https://github.com/mechazoidal/cmake_cookbook )  
 - [dev-cafe/cmake-cookbook](https://github.com/dev-cafe/cmake-cookbook )
     - ZeroMQ, minizip 등의 외부 라이브러리를 사용하는 예제 코드가 있음.
+- [Linking GLEW with CMake](https://stackoverflow.com/questions/27472813/linking-glew-with-cmake )  
+- [cross platform cmake project template](https://github.com/nekko1119/CMakeProjectTemplate ) 
+- [(일어)CMake에서  멀티플랫폼 개발(라즈베리 파이용 크로스 컴파일 포함)](https://qiita.com/take-iwiw/items/50a47dd3ff3e9163de0d )
+- [(일어)CMake에서 CUDA 애플리케이션 개발](https://qiita.com/take-iwiw/items/a29f017ea05fec77f8e1 )
+- [(일어)CMake에서 OpenCV 애플리케이션 개발](https://qiita.com/take-iwiw/items/337dce2148b3d6cee560 )
+- [(일어)c++14 with openmp + gtest-1.8의 cmake 환경을 준비](https://qiita.com/takeshi-uchitane/items/04f558cb405245cfabea )
+  
+  
+  
+## 외부 글
+- [awesome-cmake](https://github.com/onqtam/awesome-cmake )
+- [CMake 할때 쪼오오금 도움이 되는 문서](https://gist.github.com/luncliff/6e2d4eb7ca29a0afd5b592f72b80cb5c )
+- [CMakeLists.txt 명령](https://sonseungha.tistory.com/372 )
+- [1. CMake 소개와 예제, 내부 동작 원리](https://www.tuwlab.com/ece/27234 )
+- [2. CMakeLists.txt 주요 명령과 변수 정리](https://www.tuwlab.com/ece/27260 )
+- [3. CMakeLists.txt 기본 패턴](https://www.tuwlab.com/ece/27270 )
+- [cmake에서 정적 라이브러리를 하나로 합치기](http://ospace.tistory.com/539 )
+- [Bootstrapping a vcpkg-based cmake project in Visual Studio]( http://cpptruths.blogspot.com/2019/03/bootstrapping-vcpkg-based-cmake-project.html )
+- [Bootstrapping a vcpkg-based project in Linux and Windows with idiomatic cmake]( http://cpptruths.blogspot.com/2019/03/bootstrapping-vcpkg-based-cmake-project_31.html )
+- [(일어)라이브러리를 자동적으로 찾는 Find<package>.cmake 템플릿](https://qiita.com/shohirose/items/d9bda00a39a113965c5c )
+- [(일어)CMake Advent Calendar 2014](https://qiita.com/advent-calendar/2014/cmake )
+- [(일어)CMake: 프리컴파일드 헤더 작성과 이용](https://qiita.com/mrk_21/items/264f6135679239ff018a )
+- [(일어)ccache](http://qiita.com/tags/ccache/items )
+- [(일어)cmake에서 빌드 시에 쉘 스크립트를 실행하기](http://qiita.com/termoshtt/items/7f7090f9d0c52bcd2630 )
