@@ -756,6 +756,8 @@ set_target_properties (${TARGET_NAME}
 - [find_package 와 pkg_check_modules에 의한 라이브러리 탐색](find_package_And_pkg_check_modules.md)
 - [CMake에서 빌드하는 코드에 clang-tidy를 실행](clang-tidy.md)
 - [조금씩 설정을 바꾸어서 같은 소스 코드를 빌드하고 싶을 때](change_config.md)
+- [cmake에서 빌드 시에 쉘 스크립트를 실행하기](build_shellscript.md )
+- [라이브러리를 자동적으로 찾는 Find<package>.cmake 템플릿](find_package_templete.md )
   
   
   
@@ -784,8 +786,7 @@ set_target_properties (${TARGET_NAME}
 - [cmake에서 정적 라이브러리를 하나로 합치기](http://ospace.tistory.com/539 )
 - [Bootstrapping a vcpkg-based cmake project in Visual Studio]( http://cpptruths.blogspot.com/2019/03/bootstrapping-vcpkg-based-cmake-project.html )
 - [Bootstrapping a vcpkg-based project in Linux and Windows with idiomatic cmake]( http://cpptruths.blogspot.com/2019/03/bootstrapping-vcpkg-based-cmake-project_31.html )
-- [(일어)라이브러리를 자동적으로 찾는 Find<package>.cmake 템플릿](https://qiita.com/shohirose/items/d9bda00a39a113965c5c )
 - [(일어)CMake Advent Calendar 2014](https://qiita.com/advent-calendar/2014/cmake )
 - [(일어)CMake: 프리컴파일드 헤더 작성과 이용](https://qiita.com/mrk_21/items/264f6135679239ff018a )
 - [(일어)ccache](http://qiita.com/tags/ccache/items )
-- [(일어)cmake에서 빌드 시에 쉘 스크립트를 실행하기](http://qiita.com/termoshtt/items/7f7090f9d0c52bcd2630 )
+
