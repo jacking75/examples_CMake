@@ -642,7 +642,85 @@ CMake가 자동으로 설정한 컴파일러 또는 옵션 등이 원하지 않�
   
   
  
-##Tips 
+## 소스 밖에서 빌드
+[출처](https://www.wagavulin.jp/entry/2011/11/27/222658 )  
+  
+CMake를 사용하면 CMakeCache.txt과 CMakeFiles 등 다양한 파일이나 디렉토리가 생성된다.  
+결과적으로 프로젝트의 디렉토리가 잘 보이지 않는 경향이 있다.   
+이럴 때는 빌드 작업 디렉토리를 다른 디렉토리로 하면 좋다.   
+이것을 소스 외부 빌드 (out-of-source build)라고 부른다.  
+예를 들어, CMakeLists.txt와 main.cpp가 myapp 디렉토리에있을 때 myapp에 build 디렉토리를 만들고 이 속에서 빌드하도록 하자.  
+<pre>
+myapp /
+  + - CMakeLists.txt
+  + - main.cpp
+  + - build / #이 안에서 구축
+</pre>
+  
+방식은 특히 어렵지 않다. build 디렉토리를 만들고 이 속에서 cmake를 부를 뿐이다. 이 때 CMakeLists.txt이 있는 디렉토리를 지정하면 된다.  
+이렇게하면 my-project 디렉토리에 파일 디렉토리의 추가 · 변경은 되지 않는다. 필요 없게 되면 build 디렉토리를 지운면 된다.  
+<pre>
+> ls
+CMakeLists.txt main.cpp
+> mkdir build # build 디렉토리를 만든다
+> cd build / # 이 안에서 빌드
+> cmake .. && make && ./myapp
+(snip)
+hello
+</pre>
+  
+소스 외 빌드 기능을 사용하면 빌드 디렉토리를 여러 만들 수있다.   
+이렇게 하면 옵션에 대해 다른 디렉토리를 사용할 수 있게 된다. 예를 들어, 디버그 버전과 릴리스 버전을 각각 Debug, Release 디렉토리에 하면 좋을 것이다.  
+  
+
+### 소스 외 빌드와 상대 경로
+소스 외 빌드를 할 경우 주의해야 하는 것이 경로의 설정이다.   
+빌드가 이루어지는, 즉 컴파일러 및 링커가 실행 되는 디렉토리가 바뀌기 때문에 CMakeLists.txt이 있는 디렉토리로부터의 상대 패스가 있으면 빌드 하지 못할 수있다.  
+예를 들어, 다음과 같은 구성으로 설정 파일을 생성하도록 하였다.  
+<pre>
+myapp /
+  + - CMakeLists.txt
+  + - HogeConfig.h.in #이것을 바탕으로 HogeConfig.h를 생성한다
+  + - Hoge.h # #nclude "HogeConfig.h"를 포함
+  + - Hoge.cpp #
+  + - build / # 빌드 디렉토리
+</pre>  
+  
+```  
+cmake_minimum_required(VERSION 2.8)
+configure_file(
+  "HogeConfig.h.in" "HogeConfig.h"
+)
+  
+add_library(libHoge Hoge.cpp)
+```
+  
+이제 build 디렉토리에서 빌드하면 다음과  같이 실패한다.  
+<pre>
+> cmake ..
+(snip)
+> ls # HogeConfig.h를 여기에서 할 수  있다
+CMakeCache.txt CMakeFiles / HogeConfig.h Makefile cmake_install.cmake
+> make VERBOSE = 1
+(snip)
+/ usr / bin / c ++ -o CMakeFiles / libHoge.dir / Hoge.cpp.o -c /home/ws/wagavulin/06/myapp02/Hoge.cpp
+In file included from /home/ws/wagavulin/06/myapp02/Hoge.cpp:1:0 :
+/home/ws/wagavulin/06/myapp02/Hoge.h:4:24 : 치명적인 오류 : HogeConfig.h : 이런 파일이나 디렉토리가 없습니다
+</pre>
+  
+따라서 파일을 생성하려면 다음과 같이 쓸 필요가 있다.  
+```
+configure_file(
+  "${PROJECT_SOURCE_DIR}/HogeConfig.h.in"
+  "${PROJECT_SOURCE_DIR}/HogeConfig.h"
+)
+```
+  
+소스 외 빌드를 하려고 하면 오류가 발생하는 경우는 각종 경로 설정을 검토 해 보자.  
+   
+
+
+## Tips 
 ### C++14로 컴파일 하기
   
 ```  
@@ -709,6 +787,32 @@ $ sudo make install
 설치는 /usr/local/bin 에 설치된다  
   
   
+### Natvis 파일을 VS의 프로젝트에 추가 할 필요가 있을 때
+Visual Studio의 디버거에서 표시를 사용자 정의하는 것으로 Natvis가 있다.   
+[Create custom views of native objects in the debugger | Microsoft Docs](https://docs.microsoft.com/ko-kr/visualstudio/debugger/create-custom-views-of-native-objects?view=vs-2019 )  
+  
+.vcxproj 로 이것들을 추가해서 인식시키기 위해서는 
+```
+<ItemGroup>
+    <Natvis Include="inferior_vector.natvis" />
+  </ItemGroup>
+```
+  
+위와 같은 것을 쓰면 인식된다. 그럼 CMake에서 이것을 내게 하려면  
+```
+add_executable(<project name> <source files>... <natvis files>...)
+```
+  
+로 단순하게 add_executable 로 지정해두면 된다. 순서는 상관 없다.  
+VS 이외에는 바로 무시되므로 if(MSVC) 라고 쓸 필요도 없다.  
+  
+CMake 3.7.0 에서 부터이다.
+```
+cmake_minimum_required(VERSION 3.7.0)
+```
+  
+
+
 ## Makefile 에서 += 라는 것을 CMake에서 어떻게 기술?
 예를들면 Makefile 에서  
 ```
@@ -750,14 +854,17 @@ set_target_properties (${TARGET_NAME}
   
   
 ## 번역 글 
+- [빌드 옵션](build_option.md)
 - [손쉬운 xxx-config.cmake을 만드는 방법](xxx-config.cmake.md)
 - [IMPORTED 타겟](IMPORTED_target.md)
 - [빌드 시에 공개 헤더 파일을 한 장소에 복사 하고 싶다](headerFile_copy.md)
 - [find_package 와 pkg_check_modules에 의한 라이브러리 탐색](find_package_And_pkg_check_modules.md)
 - [CMake에서 빌드하는 코드에 clang-tidy를 실행](clang-tidy.md)
 - [조금씩 설정을 바꾸어서 같은 소스 코드를 빌드하고 싶을 때](change_config.md)
+- [설정 파일 만들기](make_config.md)
 - [cmake에서 빌드 시에 쉘 스크립트를 실행하기](build_shellscript.md )
 - [라이브러리를 자동적으로 찾는 Find<package>.cmake 템플릿](find_package_templete.md )
+- [라이브러리를 자동으로 다운로드 및 빌드](auto_lib_download.md)
   
   
   
