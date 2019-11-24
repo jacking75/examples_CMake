@@ -404,9 +404,10 @@ add_executable (myapp main.cpp)
 target_link_libraries (myapp foo)
 ```  
 라이브러리 이름뿐만 아니라 대상 이름도 지정해야 한다. 따라서 target_link_libraries는 add_executable 이후에 있어야 하며 먼저 지정하면 에러가 된다.
+  
 
 ### 라이브러리 경로 지정
-링크하는 라이브러리가 있는 경로를 지정하려면 link_directories 명령을 사용한다.
+링크하는 라이브러리가 있는 경로를 지정하려면 link_directories 명령을 사용한다.  
 ```
 cmake_minimum_required (VERSION 2.8)
 link_directories (/path/to/lib)
@@ -415,17 +416,18 @@ add_executable (myapp main.cpp)
   
 물론, 결과는 -L 옵션에 반영된다. 주의 사항으로는 link_directories 이때까지 이미 생성된 대상만 효과가 있다는 것이다.  
 앞의 예에서 말하면, link_directories 행과 add_executable의 행을 바꾸면 무효가 된다. 그리고 target_link_libraries의 경우와 달리, 먼저 배치하면 오류 경고가 나오지  않는다.  
-덧붙여서 include_directories과 add_definitions은 어디에 두어도 유효된다.
-  
-### 정리
-명령 이름이 기억하기 어렵기 때문에 정리해 둔다.
+덧붙여서 include_directories과 add_definitions은 어디에 두어도 유효된다.  
+    
 
-소스 파일	add_executable	add_executable (myapp src1.cpp src2.cpp)	소스 파일은 변수로 일단 변수에 넣어 두자.  
-인클루드 패스	include_directories	include_directories (/path/to/include)	CMakeLists.txt 중 어디에 두어도 사용.  
+### 정리
+명령 이름이 기억하기 어렵기 때문에 정리해 둔다.  
+  
+소스 파일	add_executable	add_executable (myapp src1.cpp src2.cpp)	소스 파일은 변수로 일단 변수에 넣어 두자.   
+인클루드 패스	include_directories	include_directories (/path/to/include)	CMakeLists.txt 중 어디에 두어도 사용.   
 라이브러리 경로	link_directories	link_directories (/path/to/lib)	이후에 생성된 대상에 대해서만 유효하다.  
 라이브러리	target_link_libraries	target_link_libraries (myapp foo)	대상 작성 후 없으면 지정할 수 없다.  
-  
-  
+    
+    
 부르는 순서는 우선 다음과 같이 해두면 좋을 것이다.  
 ```
 cmake_minimum_required (VERSION 2.8)
@@ -438,6 +440,20 @@ target_link_libraries (foo bar)
 또한 include_directories, link_directories, target_link_libraries 는 여러 번 사용하여 추가 할 수 있다.  
       
   	
+  
+## 출력 디렉토리 지정  
+[how do I make cmake output into a 'bin' dir? - StackOverflow](http://stackoverflow.com/questions/6594796/how-do-i-make-cmake-output-into-a-bin-dir)    
+실행 파일  
+```
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ../../../libs)
+```
+  
+정적 라이브러리  
+```
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ../../../libs)
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ../../../libs)
+```
+  
   
 ## CMake의 -C 옵션으로 컴파일러를 전환  
 출처: https://qiita.com/yoyomion/items/7974bb093038c21db26d  
