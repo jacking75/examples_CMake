@@ -734,9 +734,10 @@ configure_file(
   
 소스 외 빌드를 하려고 하면 오류가 발생하는 경우는 각종 경로 설정을 검토 해 보자.  
    
-
-
+  
+  
 ## Tips 
+  
 ### C++14로 컴파일 하기
   
 ```  
@@ -881,6 +882,7 @@ set_target_properties (${TARGET_NAME}
 - [cmake에서 빌드 시에 쉘 스크립트를 실행하기](build_shellscript.md )
 - [라이브러리를 자동적으로 찾는 Find<package>.cmake 템플릿](find_package_templete.md )
 - [라이브러리를 자동으로 다운로드 및 빌드](auto_lib_download.md)
+- [Boost 라이브러리를 정적 링크해서 사용하기](boost_static_lib.md )  
   
   
   
