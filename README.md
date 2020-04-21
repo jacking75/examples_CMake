@@ -883,6 +883,7 @@ set_target_properties (${TARGET_NAME}
 - [라이브러리를 자동적으로 찾는 Find<package>.cmake 템플릿](find_package_templete.md )
 - [라이브러리를 자동으로 다운로드 및 빌드](auto_lib_download.md)
 - [Boost 라이브러리를 정적 링크해서 사용하기](boost_static_lib.md )  
+- [CMake로 소스 파일 전달을 위해 압축 파일로 만들기](cmd_targz.md)
   
   
   
