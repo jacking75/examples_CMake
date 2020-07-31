@@ -905,6 +905,7 @@ set_target_properties (${TARGET_NAME}
 ## 외부 글
 - [awesome-cmake](https://github.com/onqtam/awesome-cmake )
 - [CMake 할때 쪼오오금 도움이 되는 문서](https://gist.github.com/luncliff/6e2d4eb7ca29a0afd5b592f72b80cb5c )
+- [C++ Korea 제7회 세미나  - 현실적인(Practical) CMake]( https://github.com/CppKorea/CppKoreaSeminar7th/tree/master/2%20-%20%ED%98%84%EC%8B%A4%EC%A0%81%EC%9D%B8(Practical)%20CMake )
 - [CMakeLists.txt 명령](https://sonseungha.tistory.com/372 )
 - [1. CMake 소개와 예제, 내부 동작 원리](https://www.tuwlab.com/ece/27234 )
 - [2. CMakeLists.txt 주요 명령과 변수 정리](https://www.tuwlab.com/ece/27260 )
