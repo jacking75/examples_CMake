@@ -917,6 +917,8 @@ set_target_properties (${TARGET_NAME}
 - [(일어)CMake Advent Calendar 2014](https://qiita.com/advent-calendar/2014/cmake )
 - [(일어)CMake: 프리컴파일드 헤더 작성과 이용](https://qiita.com/mrk_21/items/264f6135679239ff018a )
 - [(일어)ccache](http://qiita.com/tags/ccache/items )
+- [(일어) CMake로 빌드 후에 파일을 복사하는 방법](https://qiita.com/ykasuga/items/71b190825b2c434d4b05 )
+- [(일어) CMake에서 자동 생성 파일을 다루는 방법](https://qiita.com/hotwatermorning/items/aceef2f56a7dcf33d78c )
   
   
 ## 라이브러리, 툴
