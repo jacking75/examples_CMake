@@ -899,6 +899,7 @@ set_target_properties (${TARGET_NAME}
 - [(일어)CMake에서 CUDA 애플리케이션 개발](https://qiita.com/take-iwiw/items/a29f017ea05fec77f8e1 )
 - [(일어)CMake에서 OpenCV 애플리케이션 개발](https://qiita.com/take-iwiw/items/337dce2148b3d6cee560 )
 - [(일어)c++14 with openmp + gtest-1.8의 cmake 환경을 준비](https://qiita.com/takeshi-uchitane/items/04f558cb405245cfabea )
+- [(일어) 2022버전 CMake 프로젝트에서 googletest](https://qiita.com/utkamioka/items/cacb1001bd2abf605b15 )
   
   
   
