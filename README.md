@@ -1,8 +1,7 @@
-# CMake 예제
-
-## 예제 소개
-- 예제 코드는 CMake_example 디렉토리에 있다.  
+# 예제를 통해 CMake 사용법 배우기
   
+## 예제 소개
+- 예제 코드는 `CMake_example` 디렉토리에 있다.      
   
 ### 01 helloworld - 간단한 1개 파일의 C++ 코드
 main.cpp   
@@ -47,7 +46,7 @@ add_executable(Main main.cpp)
   
   
 
-### 03 helloworld - main 코드 파일 이외의 코드 파일이 있는 경우
+### 03 helloworld - `main.cpp` 파일 이외의 코드 파일이 있는 경우
 main.cpp  
 ```
 #include "test.h"
@@ -92,7 +91,7 @@ add_executable(Main
   
   
 
-### 04 helloworld - mai.cpp 이외의 파일이 다른 디렉토리에 있는 경우  
+### 04 helloworld - `main.cpp` 이외의 파일이 다른 디렉토리에 있는 경우  
 main.cpp  
 ```
 #include "test01/test01.h"
@@ -109,7 +108,7 @@ int main()
 }
 ```
   
-test01  
+test01/test01.h  
 ```
 class TEST01
 {
@@ -118,6 +117,7 @@ public:
 };
 ```
   
+test01/test01.cpp  
 ```
 #include "test01.h"
 #include <iostream>
@@ -128,7 +128,7 @@ void TEST01::Print()
 }
 ```
   
-test02  
+test02/test02.h  
 ```
 class TEST02
 {
@@ -137,6 +137,7 @@ public:
 };
 ```
   
+test02/test02.cpp  
 ```
 #include "test02.h"
 #include <iostream>
@@ -159,7 +160,9 @@ add_executable(Main
   
   
 
-### 05 helloworld - static 파일을 만든 후 참조  
+### 05 helloworld - 자작 static 라이브러리 참조 
+직접 만든 `Test01.lib`, `Test02.lib` 을 참조한다.  
+  
 main.cpp   
 ```
 #include "test01/test01.h"
@@ -250,8 +253,8 @@ main.cpp
 int main()
 {
     auto name = "jacking";
-  std::cout << "hello world: " << name << std::endl;
-  return 0;
+    std::cout << "hello world: " << name << std::endl;
+    return 0;
 }
 ```
   
@@ -306,8 +309,10 @@ TARGET_LINK_LIBRARIES(hello-boost pthread boost_thread boost_system boost_chrono
 ```
   
   
-
+<br>  
+  
 ## 사용법
+  
 ### 변수 다루기
 cmake 에서는 변수를  
 <pre>
@@ -422,11 +427,10 @@ add_executable (myapp main.cpp)
 ### 정리
 명령 이름이 기억하기 어렵기 때문에 정리해 둔다.  
   
-소스 파일	add_executable	add_executable (myapp src1.cpp src2.cpp)	소스 파일은 변수로 일단 변수에 넣어 두자.   
-인클루드 패스	include_directories	include_directories (/path/to/include)	CMakeLists.txt 중 어디에 두어도 사용.   
-라이브러리 경로	link_directories	link_directories (/path/to/lib)	이후에 생성된 대상에 대해서만 유효하다.  
-라이브러리	target_link_libraries	target_link_libraries (myapp foo)	대상 작성 후 없으면 지정할 수 없다.  
-    
+- 소스 파일	add_executable	add_executable (myapp src1.cpp src2.cpp)	소스 파일은 변수로 일단 변수에 넣어 두자.   
+- 인클루드 패스	include_directories	include_directories (/path/to/include)	CMakeLists.txt 중 어디에 두어도 사용.   
+- 라이브러리 경로	link_directories	link_directories (/path/to/lib)	이후에 생성된 대상에 대해서만 유효하다.  
+- 라이브러리	target_link_libraries	target_link_libraries (myapp foo)	대상 작성 후 없으면 지정할 수 없다.     
     
 부르는 순서는 우선 다음과 같이 해두면 좋을 것이다.  
 ```
@@ -495,8 +499,10 @@ clang - cmakeinit.cmake
 set(CMAKE_C_COMPILER "/usr/bin/clang" CACHE string "clang compiler" FORCE)
 set(CMAKE_CXX_COMPILER "/usr/bin/clang++" CACHE string "clang++ compiler" FORCE)
 ```
+   
+
+### 사용법  
   
-### 사용법
 #### 기본 (gcc)에서 빌드  
 ```
 mkdir build
@@ -735,7 +741,8 @@ configure_file(
 소스 외 빌드를 하려고 하면 오류가 발생하는 경우는 각종 경로 설정을 검토 해 보자.  
    
   
-  
+<br>  
+    
 ## Tips 
   
 ### C++14로 컴파일 하기
@@ -869,7 +876,8 @@ set_target_properties (${TARGET_NAME}
 ```
   
   
-  
+<br>  
+    
 ## 번역 글 
 - [빌드 옵션](build_option.md)
 - [손쉬운 xxx-config.cmake을 만드는 방법](xxx-config.cmake.md)
@@ -886,7 +894,8 @@ set_target_properties (${TARGET_NAME}
 - [CMake로 소스 파일 전달을 위해 압축 파일로 만들기](cmd_targz.md)
   
   
-  
+<br>  
+    
 ## 예제 코드  
 - [cmake-tutorial](https://github.com/pyk/cmake-tutorial )
 - [cmake-examples](https://github.com/ttroy50/cmake-examples )
@@ -902,7 +911,8 @@ set_target_properties (${TARGET_NAME}
 - [(일어) 2022버전 CMake 프로젝트에서 googletest](https://qiita.com/utkamioka/items/cacb1001bd2abf605b15 )
   
   
-  
+<br>  
+    
 ## 외부 글
 - [awesome-cmake](https://github.com/onqtam/awesome-cmake )
 - [CMake 할때 쪼오오금 도움이 되는 문서](https://gist.github.com/luncliff/6e2d4eb7ca29a0afd5b592f72b80cb5c )
@@ -922,5 +932,7 @@ set_target_properties (${TARGET_NAME}
 - [(일어) CMake에서 자동 생성 파일을 다루는 방법](https://qiita.com/hotwatermorning/items/aceef2f56a7dcf33d78c )
   
   
+<br>  
+    
 ## 라이브러리, 툴
 - [cmake-conan](https://github.com/conan-io/cmake-conan )  
